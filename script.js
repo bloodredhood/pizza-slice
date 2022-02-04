@@ -3,6 +3,16 @@ const appWrapper = document.getElementById("app-wrapper")
 
 const goProcess = () => {
 
+	const checkFunction = () => {
+		if(appWrapper.childElementCount > 1) {
+			if(appWrapper.lastChild === button) {
+				return
+			}
+			appWrapper.removeChild(appWrapper.lastChild)
+			checkFunction()
+		}
+	}
+
 	const addSpan = () => {
 		const waitingSpan = document.createElement("div")
 		appWrapper.append(waitingSpan)
@@ -14,7 +24,7 @@ const goProcess = () => {
 	const removeSpan = () => {
 		const waitingSpan = document.querySelector(".waitingSpan")
 		waitingSpan.innerHTML = ""
-		button.classList.remove = "loading"
+		button.className = "button"
 	}
 
 	const getResult = async () => {
@@ -43,9 +53,11 @@ const goProcess = () => {
 		appWrapper.append(infoSpace)
 		infoSpace.append(partyMembersCounter, pizzaEatersCounter)
 		partyMembersCounter.append(titlePartyMembersCounter, numberPartyMembersCounter)
+		partyMembersCounter.style.marginRight = "150px"
 		pizzaEatersCounter.append(titlePizzaEatersCounter, numberPizzaEatersCounter)
+		pizzaEatersCounter.style.marginLeft = "150px"
 
-		titlePartyMembersCounter.innerHTML = "Total party members"
+		titlePartyMembersCounter.innerHTML = "Total members"
 		numberPartyMembersCounter.innerHTML = partyMembers.length
 		titlePizzaEatersCounter.innerText = "Total pizza eaters"
 		numberPizzaEatersCounter.innerHTML = pizzaEaters.length
@@ -59,22 +71,23 @@ const goProcess = () => {
 		numberPartyMembersCounter.className = "counterNumber"
 		numberPizzaEatersCounter.className = "counterNumber"
 
-		for (let i = 0; i < numberPizzaEatersCounter.innerHTML/2; i++) {
+		for (let i = 0; i < pizzaEaters.length/2; i++) {
 			const div = document.createElement("div")
 			circle.append(div)
 			div.id = i + 11
 		}
 
-		let degrees = 360/numberPizzaEatersCounter
-
-		for (let u = 0; u < numberPizzaEatersCounter.innerHTML/2; u++) {
-			const div = document.getElementById(`1${u+1}`)
-			div.className = "diagonalSlicing"
-			div.style.transform = `rotate(${degrees * u}deg)`
+		for (let u = 0; u < pizzaEaters.length/2; u++) {
+			let degree = 360/pizzaEaters.length*u
+			let sliceId = `1${u+1}`
+			let styleRotate = `transform: rotate(${degree}deg)`
+			document.getElementById(sliceId).className = "diagonalSlicing"
+			document.getElementById(sliceId).setAttribute("style", styleRotate)
 		}
 	}
 
 	const processFunc = () => {
+		checkFunction()
 		addSpan()
 		setTimeout(getResult, 1000)
 	}

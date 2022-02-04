@@ -4,7 +4,8 @@
 	width: 1140px;
 	text-align: center;
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
+	align-items: center;
 	flex-direction: column;
 }
 
@@ -15,7 +16,6 @@
 
 .infoSpace {
 	display: flex;
-	justify-content: space-around;
 }
 
 .circle {
@@ -25,7 +25,8 @@
   width: 400px;
   border-radius: 50%;
 	border: black solid 1px;
-	position: relative
+	position: relative;
+	background-image: url("pizza.png") 
 }
 
 .counterList {
@@ -47,4 +48,5 @@
 	left: 50%;
 	border: 1px black solid;
 	height: 400px;
+	counter-increment: i;
 }
